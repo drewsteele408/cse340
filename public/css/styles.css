@@ -98,11 +98,11 @@
   padding: 1rem;
 }
 
-.col {
+.column-template {
   flex: 1 1 300px;
 }
 
-.col h2 {
+.column-template h2 {
   font-size: 1.25rem;
   margin-bottom: 1rem;
   border-bottom: 2px solid #0aa;
