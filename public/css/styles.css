@@ -4,3 +4,130 @@
 *:after {
   box-sizing: border-box;
 }
+
+
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: #fff;
+}
+
+.siteName {
+  font-size: 1.5rem;
+}
+
+.siteName a {
+  text-decoration: none;
+}
+
+#tools {
+  font-size: 1.2rem;
+}
+
+#tools a {
+  text-decoration: none;
+}
+
+.main-nav {
+  background-color: dimgrey;
+}
+
+.main-nav ul {
+  text-decoration: none;
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.main-nav li {
+  margin: 0;
+  padding: 10px;
+  color: white;
+}
+
+/* -------------------------------------------------
+  Hero top section
+---------------------------------------------------*/
+.hero {
+  padding: 2rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 1.2rem;
+}
+
+.hero-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.features {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.button {
+  text-decoration: none;
+  background-color: aqua;
+  color: black;
+  padding: 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: black;
+  color: white;
+}
+
+
+/* -------------------------------------------------
+  Column section
+---------------------------------------------------*/
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.col {
+  flex: 1 1 300px;
+}
+
+.col h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #0aa;
+  padding-bottom: 0.25rem;
+}
+
+.upgrade-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  list-style: none;
+}
+
+.upgrade-grid img {
+  max-width: 100%;
+  display: block;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+.caption {
+  display: block;
+  text-align: center;
+  margin-top: 0.25rem;
+  text-decoration: none;
+  color: #0aa;
+  font-weight: bold;
+}
