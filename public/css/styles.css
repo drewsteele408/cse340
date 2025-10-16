@@ -34,7 +34,7 @@
 }
 
 .main-nav {
-  background-color: grey;
+  background-color: #444;
 }
 
 .main-nav ul {
@@ -241,5 +241,10 @@ footer {
 
   .vehicle-detail {
     padding: 1.5rem;
+  }
+
+  .hero img {
+    width: 50%;
+    padding: 10px;
   }
 }
