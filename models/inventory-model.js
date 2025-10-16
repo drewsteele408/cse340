@@ -29,6 +29,25 @@ async function getInventoryByClassificationId(classification_id) {
   }
 }
 
+/* ***************************
+ *  Get the inventory item for a single view by inv_id
+ * ************************** */
+
+async function getItemDetail(inv_id) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM  public.inventory AS i
+      JOIN public.classification AS c
+      ON i.classification_id = c.classification_id
+      WHERE i.inv_id = $1`, 
+      [inv_id]
+    )
+    return data.rows[0]
+  } catch(error) {
+    console.error("getItemDetail error" + error)
+  }
+}
+
 module.exports = {
-    getInventoryByClassificationId, getClassifications
+    getInventoryByClassificationId, getClassifications, getItemDetail
 }

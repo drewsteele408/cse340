@@ -58,5 +58,30 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+/* **************************************
+* Build the single item view
+* ************************************ */
+Util.buildItemGrid= async function(data) {
+  let grid = ''
+  if(data){
+    grid = '<div class="vehicle-detail">'
+
+    // vehicle info
+    grid += '<div class="vehicle-info">'
+    grid += `<h2>${data.inv_year} ${data.inv_make} ${data.inv_model}</h2>`
+    // vehicle image
+    grid += `<img class="vehicle-image" src="${data.inv_image}" alt="Image of ${data.inv_make} ${data.inv_model} on CSE Motors">`
+    grid += `<p class="price"><strong>Price:</strong> $${new Intl.NumberFormat('en-US').format(data.inv_price)}</p>`
+    grid += `<p class="mileage"><strong>Mileage:</strong> ${data.inv_miles}</p>`
+    grid += `<p class="description">${data.inv_description}</p>`
+    grid += '</div>'
+
+    grid += '</div>'
+  } else {
+    grid = '<p class="notice">Sorry, no vehicle details could be found.</p>'
+  }
+  return grid
+}
+
 module.exports = Util
 
