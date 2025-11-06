@@ -83,5 +83,23 @@ Util.buildItemGrid= async function(data) {
   return grid
 }
 
+
+/* **************************************
+* Build the handle errors funtion
+* ************************************ */
+Util.handleErrors = (err) => {
+  return async (req, res, next) => {
+    try {
+      await err(req, res, next)
+    } catch (error) {
+      console.error("Error:", error)
+      res.status(500).render("errors/500", {
+        title: "Server error", 
+        message: "An unexpected error occurred"
+      })
+    }
+  }
+}
+
 module.exports = Util
 
