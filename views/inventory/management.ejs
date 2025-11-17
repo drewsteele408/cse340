@@ -1,14 +1,7 @@
 <h1><%= title %></h1>
 
-<% if (errors) { %>
-  <ul class="notice">
- <% errors.array().forEach(error => { %>
-   <li><%= error.msg %></li>
-<%  }) %>
- </ul>
-<% } %>
 
 <div class="management-view">
-    <a href="add-classification.ejs"><button class="classification-button">Add a New Classification</button></a>
-    <a href="add-inventory.ejs"><button class="inventory-button">Add a New Inventory Item</button></a>
+    <a href="/inv/add-classification"><button class="classification-button">Add a New Classification</button></a>
+    <a href="/inv/add-inventory"><button class="inventory-button">Add a New Inventory Item</button></a>
 </div>

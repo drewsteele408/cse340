@@ -1,6 +1,7 @@
 const utilties = require("./index")
     const { body, validationResult } = require("express-validator")
     const validate = {}
+const invModel = require("../models/inventory-model")
 
 /*  **********************************
   *  Classifcation Data Validation Rules
@@ -22,6 +23,11 @@ const utilties = require("./index")
   * ********************************* */
    validate.inventoryRules = () => {
     return [
+    body("classification_id")
+      .notEmpty()
+      .withMessage("Please select a classification")
+      .isInt()
+      .withMessage("Classification must be valid"),
       // make is required and must be string
         body("inv_make")
             .trim()
@@ -50,6 +56,18 @@ const utilties = require("./index")
             .notEmpty()
             .isLength({ min: 1 })
             .withMessage("Please provide a description"),
+
+        body("inv_image")
+            .trim()
+            .escape()
+            .notEmpty()
+            .withMessage("Please provide an image path"),
+
+        body("inv_thumbnail")
+            .trim()
+            .escape()
+            .notEmpty()
+            .withMessage("Please provide a thumbnail path"),
         // Price is required and must be a number
         body("inv_price")
             .trim()
@@ -105,22 +123,25 @@ validate.checkClassData = async (req, res, next) => {
  * Check inventory data and return errors or continue to management 
  * ***************************** */
 validate.checkInvData = async (req, res, next) => {
-  const { inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color } = req.body
+  const { inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id } = req.body
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
+    let classifications = await invModel.getClassifications()
     res.render("inventory/add-inventory", {
       errors,
       title: "Add Inventory Item",
       nav,
+      classifications: classifications.rows,
       inv_make, 
       inv_model, 
       inv_year, 
       inv_description, 
       inv_price, 
       inv_miles, 
-      inv_color
+      inv_color, 
+      classification_id
     })
     return
   }

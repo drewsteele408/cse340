@@ -8,7 +8,18 @@
  </ul>
 <% } %>
 
-<form action="/inventory/add-inventory" method="post">
+<form action="/inv/add-inventory" method="post">
+    <label for="classification">Classification</label>
+    <select name="classification_id" id="classification" required>
+      <option value="">Choose a Classification</option>
+      <% classifications.forEach(classification => { %>
+          <option value="<%= classification.classification_id %>"
+              <%= locals.classification_id && locals.classification_id == classification.classification_id ? 'selected' : '' %>>
+              <%= classification.classification_name %>
+          </option>
+      <% }) %>
+    </select>
+
     <label for="make">Make</label>
     <input type="text" name="inv_make" id="make" required>
 
@@ -19,7 +30,13 @@
     <input type="number" name="inv_year" id="year" required>
 
     <label for="description">Description</label>
-    <textarea type="text" name="inv_description" id="description" required>
+    <textarea type="text" name="inv_description" id="description" required></textarea>
+
+    <label for="image">Image Path</label>
+    <input type="text" name="inv_image" id="image" required>
+
+    <label for="thumbnail">Thumbnail Path</label>
+    <input type="text" name="inv_thumbnail" id="thumbnail" required>
 
     <label for="price">Price</label>
     <input type="number" name="inv_price" id="price" required>
