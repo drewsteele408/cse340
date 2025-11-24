@@ -81,7 +81,7 @@ invCont.buildClassification = async function (req, res, next) {
 
   if (classResult) {
     req.flash("notice", `${classification_name} added.`)
-    return res.redirect("/inv")
+    return res.redirect("/account")
   } else {
     req.flash("notice", "Failed to add classifcation")
     res.status(501).render("inventory/add-classification", {
@@ -128,7 +128,7 @@ invCont.buildClassification = async function (req, res, next) {
 
 if (invResult) {
     req.flash("notice", `New Inventory item added.`)
-    return res.redirect("/inv")
+    return res.redirect("/account")
   } else {
     req.flash("notice", "Failed to add new inventory item")
     let classifications = await invModel.getClassifications()
