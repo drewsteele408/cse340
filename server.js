@@ -34,6 +34,7 @@ const utilities = require("./utilities/")
   name: 'sessionId',
 }))
 
+
 // Express Messages Middleware
 app.use(require('connect-flash')())
 app.use(function(req, res, next){

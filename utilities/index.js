@@ -119,6 +119,7 @@ Util.checkJWTToken = (req, res, next) => {
      return res.redirect("/account/login")
     }
     res.locals.accountData = accountData
+    res.locals.user = accountData
     res.locals.loggedin = 1
     next()
    })
@@ -138,6 +139,34 @@ Util.checkJWTToken = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+
+/* ****************************************
+ *  Check Admin status
+ * ************************************ */
+Util.checkAdmin = (req, res, next) => {
+  const token = req.cookies.jwt
+  
+  if (!token) {
+    req.flash("notice", "Please log in first.")
+    return res.redirect("/account/login")
+  }
+  
+  try {
+    const userData = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+    
+    if (userData.account_type !== "Employee" && userData.account_type !== "Admin") {
+      req.flash("notice", "You do not have permission to access this area.")
+      return res.redirect("/account/login")
+    }
+    
+    req.user = userData
+    next()
+  } catch (error) {
+    req.flash("notice", "Please log in again.")
+    res.redirect("/account/login")
+  }
+}
+
 
 module.exports = Util
 

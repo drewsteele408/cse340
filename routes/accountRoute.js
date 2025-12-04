@@ -10,12 +10,17 @@ const manValidate = require('../utilities/management-validation')
 // Route to build account 
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
-router.get("/", utilities.checkLogin, utilities.handleErrors(invController.buildManagement))
 router.get("/account",  utilities.handleErrors(accountController.buildAccount))
+router.get("/update/:account_id", utilities.handleErrors(accountController.buildUpdateAccount))
 
 // Management routes
-router.get("/add-classification", utilities.checkLogin, utilities.handleErrors(invController.buildClassification))
-router.get("/add-inventory", utilities.checkLogin, utilities.handleErrors(invController.buildInventory))
+router.get("/add-classification",  utilities.checkAdmin, utilities.handleErrors(invController.buildClassification))
+router.get("/add-inventory", utilities.checkAdmin, utilities.handleErrors(invController.buildInventory))
+router.get("/", utilities.checkAdmin, utilities.handleErrors(invController.buildManagement))
+
+
+// Logout route
+router.get("/logout", utilities.handleErrors(accountController.logout))
 
 // Process the registration data
 router.post(
@@ -36,7 +41,7 @@ router.post(
 // Process classification 
 router.post(
   "/add-classification",
-  utilities.checkLogin,
+  utilities.checkAdmin,
   manValidate.classificationRules(),
   manValidate.checkClassData,
   utilities.handleErrors(invController.addClassification)
@@ -45,9 +50,18 @@ router.post(
 // Process new inventory item 
 router.post(
     "/add-inventory", 
-    utilities.checkLogin,
+    utilities.checkAdmin,
     manValidate.inventoryRules(), 
     manValidate.checkInvData, 
     utilities.handleErrors(invController.addInventory))
+
+// Process account update
+router.post("/update/:account_id", utilities.handleErrors(accountController.updateAccount))
+
+// Update password
+router.post("/change-password",
+  regValidate.changePasswordRules(), 
+  regValidate.checkPasswordData, 
+  utilities.handleErrors(accountController.changePassword))
 
 module.exports = router
